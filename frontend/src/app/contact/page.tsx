@@ -20,7 +20,7 @@ function useScrollFadeIn() {
       if (el) observer.unobserve(el);
     };
   }, []);
-  return ref;<P:79></P:79>
+  return ref;
 }
 
 
@@ -76,6 +76,7 @@ const ContactPage = () => {
           Contact Me
         </h2>
         <p className="text-gray-700 dark:text-gray-300 mb-6">
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
           I'm always open to discussing new projects, ideas, or opportunities. Feel free to reach out using the form below, or connect with me on LinkedIn.
         </p>
         <div className="mb-6 text-center">
