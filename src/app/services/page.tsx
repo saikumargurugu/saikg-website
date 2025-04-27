@@ -2,15 +2,21 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { FaCode, FaCloud, FaServer, FaMobileAlt } from 'react-icons/fa';
+import PropTypes from 'prop-types'; // Import PropTypes
 
+interface ServiceCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}
 
-const ServiceCard = ({ icon, title, description, children }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description, children }) => {
   const [isHovered, setIsHovered] = useState(false);
-
 
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-full flex flex-col justify-between items-center" //  Added items-center
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-full flex flex-col justify-between items-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -24,8 +30,7 @@ const ServiceCard = ({ icon, title, description, children }) => {
         {description}
       </p>
       <div
-        className={`mt-4 overflow-hidden transition-all duration-500 ease-in-out ${isHovered ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-          }`}
+        className={`mt-4 overflow-hidden transition-all duration-500 ease-in-out ${isHovered ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
       >
         {children}
       </div>
@@ -39,6 +44,13 @@ const ServiceCard = ({ icon, title, description, children }) => {
   );
 };
 
+// Add PropTypes validation
+ServiceCard.propTypes = {
+  icon: PropTypes.node.isRequired,       // Icon can be any valid JSX (e.g., FaCode)
+  title: PropTypes.string.isRequired,    // Title is a required string
+  description: PropTypes.string.isRequired, // Description is a required string
+  children: PropTypes.node.isRequired,  // Children can be any valid JSX (e.g., list items)
+};
 
 const ServicesPage = () => {
   return (
@@ -53,7 +65,6 @@ const ServicesPage = () => {
           </p>
         </div>
 
-
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <ServiceCard
             icon={<FaCode size={48} />}
@@ -67,7 +78,6 @@ const ServicesPage = () => {
             </ul>
           </ServiceCard>
 
-
           <ServiceCard
             icon={<FaServer size={48} />}
             title="API Development"
@@ -79,7 +89,6 @@ const ServicesPage = () => {
               <li>API Documentation</li>
             </ul>
           </ServiceCard>
-
 
           <ServiceCard
             icon={<FaCloud size={48} />}
@@ -93,7 +102,6 @@ const ServicesPage = () => {
             </ul>
           </ServiceCard>
 
-
           <ServiceCard
             icon={<FaMobileAlt size={48} />}
             title="Mobile App Development"
@@ -106,7 +114,6 @@ const ServicesPage = () => {
             </ul>
           </ServiceCard>
         </div>
-
 
         <div className="mt-12 border-t border-gray-200 dark:border-gray-700 py-8">
           <div className="text-center">
@@ -128,6 +135,5 @@ const ServicesPage = () => {
     </section>
   );
 };
-
 
 export default ServicesPage;

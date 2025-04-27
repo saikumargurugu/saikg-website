@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import {
   FaArrowRight,
@@ -16,7 +16,7 @@ function useScrollFadeIn() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('opacity-100', 'translate-y-0');
+          el?.classList.add('opacity-100', 'translate-y-0');
         }
       },
       { threshold: 0.1 }
@@ -47,7 +47,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen px-6 sm:px-10 py-12 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
-      
+
       {/* Hero Section */}
       <section
         ref={fade1}
@@ -89,13 +89,10 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-blue-700 dark:text-blue-200 mb-8 text-center">
           About Me
         </h2>
-        {/* For mobile: image appears on top. On md and above, text on left, image on right */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Profile Image Container */}
           <div className="order-first md:order-last flex items-center justify-center">
             <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-blue-100 dark:bg-blue-700 rounded-full" />
           </div>
-          {/* Text Content Container */}
           <div className="order-last md:order-first">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               I&apos;m a backend-focused full-stack developer with a passion for crafting efficient and scalable web solutions.
