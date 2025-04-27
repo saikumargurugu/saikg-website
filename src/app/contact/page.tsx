@@ -4,13 +4,13 @@ import { FaPaperPlane, FaLinkedin } from 'react-icons/fa';
 
 
 function useScrollFadeIn() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement | null>(null);
   useEffect(() => {
     const el = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('opacity-100', 'translate-y-0');
+          el?.classList?.add('opacity-100', 'translate-y-0');
         }
       },
       { threshold: 0.1 }

@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 
 function useScrollFadeIn() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement | null>(null);
   useEffect(() => {
     const el = ref.current;
     const observer = new IntersectionObserver(

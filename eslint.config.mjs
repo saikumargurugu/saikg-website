@@ -15,7 +15,6 @@ const eslintConfig = [
     rules: {
       "react/no-unescaped-entities": "off", // ✅ disabling unescaped entities rule
       "@typescript-eslint/no-non-null-assertion": "off",
-
     },
   },
 ];
