@@ -58,10 +58,10 @@ const ServicesPage = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-blue-700 dark:text-blue-200 mb-4">
-            My Services
+            What I Can Do For You
           </h2>
           <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-            I offer a range of wexfsdgsggdxfdfb development services designed to elevate your online presence and drive your business forward.
+            I am good at development of web services designed to elevate your online presence and drive your business forward.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ const ServicesPage = () => {
               Ready to Transform Your Digital Presence?
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Let&apos;s discuss how my services can help you achieve your business objectives.
+              Let&apos;s discuss how my knowledge can help you achieve your business objectives.
             </p>
             <Link
               href="/contact"

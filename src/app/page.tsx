@@ -91,7 +91,13 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="order-first md:order-last flex items-center justify-center">
-            <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-blue-100 dark:bg-blue-700 rounded-full" />
+            <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-blue-100 dark:bg-blue-700 rounded-full" >
+              <img
+                src="https://avatars.githubusercontent.com/u/47783993?s=96&v=4"
+                alt="Sai Kumar Gurugubelli"
+                className="w-full h-full rounded-full object-cover shadow-lg"
+              />
+            </div>
           </div>
           <div className="order-last md:order-first">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
@@ -155,7 +161,7 @@ export default function Home() {
         className="mt-24 max-w-6xl mx-auto px-4 opacity-0 translate-y-10 transition duration-1000 ease-out"
       >
         <h3 className="text-3xl font-bold text-blue-700 dark:text-blue-200 mb-10 text-center">
-          My Services
+          What I Am Good At
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition duration-300 hover:scale-105">
@@ -172,7 +178,7 @@ export default function Home() {
             </ul>
             <Link
               href="/services"
-              className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
+              className="text-blue-500 hover:text-blue-700 dark:text-white-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
             >
               Learn More
             </Link>
@@ -191,7 +197,7 @@ export default function Home() {
             </ul>
             <Link
               href="/services"
-              className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
+              className="text-blue-500 hover:text-blue-700 dark:text-white-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
             >
               Learn More
             </Link>
@@ -201,7 +207,7 @@ export default function Home() {
               Cloud & DevOps
             </h4>
             <p className="text-gray-700 dark:text-gray-300 text-base mb-4">
-              I help with cloud hosting and deployment.
+              I can manage cloud hosting and deployment.
             </p>
             <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4">
               <li>AWS deployment</li>
@@ -210,7 +216,7 @@ export default function Home() {
             </ul>
             <Link
               href="/services"
-              className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
+              className="text-blue-500 hover:text-blue-700 dark:text-white-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
             >
               Learn More
             </Link>
@@ -229,7 +235,7 @@ export default function Home() {
             </ul>
             <Link
               href="/services"
-              className="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
+              className="text-blue-500 hover:text-blue-700 dark:text-white-300 dark:hover:text-blue-200 hover:underline transition-colors duration-300"
             >
               Learn More
             </Link>
