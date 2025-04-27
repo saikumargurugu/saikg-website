@@ -28,18 +28,44 @@ const ContactPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState(null);
   const fade = useScrollFadeIn();
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //  In a real app, you'd handle form submission here (e.g., send to an API)
-    console.log('Form submitted:', { name, email, message });
-    //  Reset form fields
-    setName('');
-    setEmail('');
-    setMessage('');
-    alert('Thank you for your message!'); //  Replace with a better UI notification
+    setIsSubmitting(true);
+    setSubmissionError(null);
+
+
+    try {
+      const response = await fetch('http://localhost:5001/send-email', { // Ensure this matches your backend route
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Submission failed:', errorData);
+        setSubmissionError(errorData?.errors?.[0]?.msg || 'Failed to send message. Please try again.');
+      } else {
+        console.log('Message sent successfully!');
+        setName('');
+        setEmail('');
+        setMessage('');
+        alert('Thank you for your message!'); // Replace with a better UI notification
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmissionError('An unexpected error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -118,10 +144,21 @@ const ContactPage = () => {
             <button
               type="submit"
               className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 text-white rounded-full font-semibold shadow-md hover:scale-105 transition duration-300"
+              disabled={isSubmitting}
             >
               Send Message
-              <FaPaperPlane className="ml-2" />
+              {isSubmitting ? (
+                <span className="ml-2 animate-spin">
+                  {/* You can use a loading spinner component here */}
+                  ...
+                </span>
+              ) : (
+                <FaPaperPlane className="ml-2" />
+              )}
             </button>
+            {submissionError && (
+              <p className="mt-4 text-red-500">{submissionError}</p>
+            )}
           </div>
         </form>
       </section>
