@@ -98,7 +98,7 @@ export default function Home() {
           {/* Text Content Container */}
           <div className="order-last md:order-first">
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              I'm a backend-focused full-stack developer with a passion for crafting efficient and scalable web solutions.
+              I&apos;m a backend-focused full-stack developer with a passion for crafting efficient and scalable web solutions.
             </p>
             <p className="text-gray-700 dark:text-gray-300">
               My stack includes: JavaScript, TypeScript, Python, Django, Node.js, React.js, and more.
@@ -249,7 +249,7 @@ export default function Home() {
           Ready to Elevate Your Web Presence?
         </h3>
         <p className="text-lg mb-8 max-w-3xl mx-auto">
-          Let's build a powerful online solution for your business.
+          Let&apos;s build a powerful online solution for your business.
         </p>
         <Link
           href="/contact"
