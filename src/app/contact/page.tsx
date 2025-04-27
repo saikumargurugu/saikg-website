@@ -29,7 +29,7 @@ const ContactPage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionError, setSubmissionError] = useState(null);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
   const fade = useScrollFadeIn();
 
 

@@ -1,22 +1,16 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
+import { defineConfig } from "eslint/config";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+export default defineConfig([
   {
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    languageOptions: { globals: globals.browser },
     rules: {
-      "react/no-unescaped-entities": "off", // ✅ disabling unescaped entities rule
-      "@typescript-eslint/no-non-null-assertion": "off",
+      "react/prop-types": "off", // Disable prop-types rule for all files
     },
   },
-];
-
-export default eslintConfig;
+  tseslint.configs.recommended, // TypeScript ESLint rules
+  pluginReact.configs.flat.recommended, // React plugin rules
+]);
