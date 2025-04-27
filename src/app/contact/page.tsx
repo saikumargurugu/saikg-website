@@ -135,7 +135,7 @@ const ContactPage = () => {
               id="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              rows="4"
+              rows={4}
               className="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
               required
             ></textarea>

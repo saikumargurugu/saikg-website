@@ -34,7 +34,7 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setGreeting("Welcome to my freelance dev site!");
+      setGreeting("Welcome! Let's build something amazing together.");
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
