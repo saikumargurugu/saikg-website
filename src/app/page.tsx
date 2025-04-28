@@ -94,12 +94,12 @@ export default function Home() {
       About Me
     </h2>
     <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-      I'm a <span className="font-semibold text-blue-600 dark:text-blue-400">Full-stack developer</span> with a strong passion for building <span className="font-semibold">efficient, scalable, and reliable web solutions</span>.
+      I&apos;m a <span className="font-semibold text-blue-600 dark:text-blue-400">Full-stack developer</span> with a strong passion for building <span className="font-semibold">efficient, scalable, and reliable web solutions</span>.
       I specialize in designing robust backend systems while ensuring smooth, modern frontend experiences.
     </p>
     <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
       With a solid foundation across backend and frontend technologies, I enjoy creating applications that are powerful under the hood and seamless for users.
-      I'm dedicated to writing clean, maintainable code and continuously staying updated with the latest technologies.
+      I&apos;m dedicated to writing clean, maintainable code and continuously staying updated with the latest technologies.
     </p>
     <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md">
       <h3 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-4">My Core Stack Includes:</h3>

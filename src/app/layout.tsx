@@ -1,11 +1,11 @@
-"use client"; // Ensure this is a client-side component
+"use client"; // Ensure this is a client-side component FaMoon, FaSun,
 
 import React from 'react';  // Import React explicitly
 import './globals.css';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaGithub, FaLinkedin, FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa'; // Added FaBars and FaTimes
+import { FaGithub, FaLinkedin, FaBars, FaTimes } from 'react-icons/fa'; // Added FaBars and FaTimes
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     const [darkMode, setDarkMode] = useState(false);
@@ -45,9 +45,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }
     }, [darkMode]);
 
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-    };
+    // const toggleDarkMode = () => {
+    //     setDarkMode(!darkMode);
+    // };
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
