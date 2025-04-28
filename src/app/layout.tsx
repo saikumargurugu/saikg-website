@@ -94,12 +94,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             >
                                 Contact
                             </Link>
-                            <button
+                            {/* <button
                                 onClick={toggleDarkMode}
                                 className="flex items-center py-1 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none transition-colors duration-300"
                             >
                                 {darkMode ? <FaSun size={20} className="inline-block align-middle" /> : <FaMoon size={20} className="inline-block align-middle" />}
-                            </button>
+                            </button> */}
                         </div>
                         {/* Mobile Menu Button */}
                         <div className="md:hidden">
@@ -135,12 +135,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             >
                                 Contact
                             </Link>
-                            <button
+                            {/* <button
                                 onClick={toggleDarkMode}
                                 className="flex items-center py-1 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none transition-colors duration-300"
-                            >
-                                {darkMode ? <FaSun size={20} className="inline-block align-middle" /> : <FaMoon size={20} className="inline-block align-middle" />}
-                            </button>
+                            > */}
+                                {/* {darkMode ? <FaSun size={20} className="inline-block align-middle" /> : <FaMoon size={20} className="inline-block align-middle" />} */}
+                            {/* </button> */}
                         </div>
                     </div>
                 </header>

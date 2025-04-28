@@ -57,14 +57,17 @@ export default function Home() {
           Sai Kumar Gurugubelli
         </h2>
         <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-16 text-gray-700 dark:text-gray-300 font-light">
-          A developer skilled in building robust backend solutions. My key skills include:
+          A passionate developer specializing in building robust and scalable backend solutions. I have strong expertise in designing and implementing high-performance APIs, architecting server-side applications, and integrating cloud services. My key skills include:
         </p>
-        <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
+        <div className='text-left max-w-2xl mx-auto'>
+        <ul className="list-disc list-inside pl-4 text-gray-700 dark:text-gray-300">
           <li>API Development (RESTful)</li>
           <li>Database Management (MSSQL)</li>
           <li>Cloud Services (AWS)</li>
           <li>Backend Frameworks (Django, Node.js)</li>
         </ul>
+        </div>
+
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
           <Link
             href="/contact"
@@ -73,7 +76,7 @@ export default function Home() {
             {greeting} <FaArrowRight className="ml-2" />
           </Link>
           <Link
-            href="/portfolio"
+            href="https://github.com/saikumargurugu"
             className="inline-flex items-center px-6 py-3 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-blue-600 dark:text-blue-200 rounded-full text-lg font-semibold shadow-md hover:scale-105 transform transition duration-300"
           >
             My Work <FaCode className="ml-2" />
@@ -86,34 +89,31 @@ export default function Home() {
         ref={fade5}
         className="mt-24 py-16 bg-white dark:bg-gray-800 rounded-2xl shadow-md px-8 sm:px-12 opacity-0 translate-y-10 transition duration-1000 ease-out"
       >
-        <h2 className="text-3xl font-bold text-blue-700 dark:text-blue-200 mb-8 text-center">
-          About Me
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="order-first md:order-last flex items-center justify-center">
-            <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-blue-100 dark:bg-blue-700 rounded-full" >
-              <img
-                src="https://avatars.githubusercontent.com/u/47783993?s=96&v=4"
-                alt="Sai Kumar Gurugubelli"
-                className="w-full h-full rounded-full object-cover shadow-lg"
-              />
-            </div>
-          </div>
-          <div className="order-last md:order-first">
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              I&apos;m a backend-focused full-stack developer with a passion for crafting efficient and scalable web solutions.
-            </p>
-            <p className="text-gray-700 dark:text-gray-300">
-              My stack includes: JavaScript, TypeScript, Python, Django, Node.js, React.js, and more.
-            </p>
-            <Link
-              href="/about"
-              className="inline-block mt-6 px-6 py-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900 dark:hover:bg-blue-700 text-blue-700 dark:text-blue-200 rounded-full hover:scale-105 transition duration-300"
-            >
-              Learn More
-            </Link>
-          </div>
-        </div>
+         <div className="max-w-4xl mx-auto px-6">
+    <h2 className="text-3xl font-extrabold text-blue-700 dark:text-blue-200 mb-6 text-center">
+      About Me
+    </h2>
+    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+      I'm a <span className="font-semibold text-blue-600 dark:text-blue-400">Full-stack developer</span> with a strong passion for building <span className="font-semibold">efficient, scalable, and reliable web solutions</span>.
+      I specialize in designing robust backend systems while ensuring smooth, modern frontend experiences.
+    </p>
+    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+      With a solid foundation across backend and frontend technologies, I enjoy creating applications that are powerful under the hood and seamless for users.
+      I'm dedicated to writing clean, maintainable code and continuously staying updated with the latest technologies.
+    </p>
+    <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md">
+      <h3 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-4">My Core Stack Includes:</h3>
+      <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+        <li><span className="font-medium text-blue-600 dark:text-blue-400">JavaScript</span> and <span className="font-medium text-blue-600 dark:text-blue-400">TypeScript</span> for dynamic and type-safe development</li>
+        <li><span className="font-medium text-blue-600 dark:text-blue-400">Python</span> and <span className="font-medium text-blue-600 dark:text-blue-400">Django</span> for secure, scalable backends</li>
+        <li><span className="font-medium text-blue-600 dark:text-blue-400">Node.js</span> for event-driven server-side development</li>
+        <li><span className="font-medium text-blue-600 dark:text-blue-400">React.js</span> for building modern and responsive frontends</li>
+        <li>Experience with <span className="font-medium text-blue-600 dark:text-blue-400">API Development</span>, <span className="font-medium text-blue-600 dark:text-blue-400">Database Management</span>, and <span className="font-medium text-blue-600 dark:text-blue-400">Cloud Services (AWS)</span></li>
+        <li>Skilled in <span className="font-medium text-blue-600 dark:text-blue-400">DevOps practices</span> for seamless deployment and scaling</li>
+      </ul>
+    </div>
+  </div>
+
       </section>
 
       {/* Highlight Section */}
