@@ -117,6 +117,33 @@ export default function Home() {
       </section>
 
       {/* Highlight Section */}
+      {/* Projects Section */}
+      <section
+        className="mt-24 py-16 bg-white dark:bg-gray-900 rounded-2xl shadow-lg opacity-0 translate-y-10 transition duration-1000 ease-out"
+        ref={fade2}
+      >
+        <h3 className="text-3xl font-bold text-center text-blue-700 dark:text-blue-200 mb-12">
+          Projects
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition duration-300 hover:scale-105">
+            <h4 className="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400 text-center">
+              Brisbane Badminton Center
+            </h4>
+            <p className="text-gray-700 dark:text-gray-300 text-base mb-4 text-center">
+              A modern web application for booking and managing badminton courts in Brisbane. Built with Next.js, React, and cloud technologies for a seamless user experience.
+            </p>
+            <a
+              href="https://brisbanebadmintoncenter.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 text-white rounded-full text-lg font-semibold shadow-md hover:scale-105 transform transition duration-300"
+            >
+              Visit Project
+            </a>
+          </div>
+        </div>
+      </section>
       <section
         ref={fade2}
         className="mt-24 py-16 bg-white dark:bg-gray-900 rounded-2xl shadow-lg opacity-0 translate-y-10 transition duration-1000 ease-out"
