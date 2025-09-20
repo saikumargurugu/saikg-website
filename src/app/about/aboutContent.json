@@ -1,0 +1,70 @@
+{
+  "profile": {
+    "name": "Sai Kumar Gurugubelli",
+    "location": "Brisbane, Australia",
+    "availability": "Open to remote & onsite work",
+    "avatarInitials": "SG",
+    "github": "https://github.com/saikumargurugu",
+    "linkedin": "https://www.linkedin.com/in/sai-kumar-gurugubelli/",
+    "introHeading": "About Me",
+    "introText": "A passionate and results-driven freelance web developer dedicated to building robust and scalable web applications."
+  },
+  "story": {
+    "heading": "My Story",
+    "paragraphs": [
+      "Driven by a passion for crafting efficient and scalable web solutions, I've honed my skills in backend development and full-stack technologies.",
+      "I specialize in building robust APIs, designing efficient databases, and leveraging cloud services to deliver high-performing applications.",
+      "My goal is to help businesses establish a strong online presence and achieve their objectives through innovative web solutions."
+    ]
+  },
+  "skills": {
+    "heading": "Skills & Expertise",
+    "categories": [
+      {
+        "title": "Backend",
+        "items": [
+          "JavaScript", "TypeScript", "Python", "C++",
+          "Django", "Django Rest Framework", "Node.js",
+          "Database Design (MSSQL, MongoDB)"
+        ]
+      },
+      {
+        "title": "Frontend",
+        "items": [
+          "React JS", "React Native", "HTML", "CSS", "JavaScript"
+        ]
+      },
+      {
+        "title": "Tools & Technologies",
+        "items": [
+          "Git", "Docker", "Linux OS", "AWS (S3, EC2)", "CI/CD Pipelines"
+        ]
+      }
+    ]
+  },
+  "education": {
+    "heading": "Education",
+    "degrees": [
+      {
+        "title": "Master of Information Technology",
+        "institution": "Griffith University, Australia",
+        "date": "Graduated in June 2024"
+      },
+      {
+        "title": "Bachelor of Technology in Computer Science and Engineering",
+        "institution": "JNTU-K, India",
+        "date": "Graduated in July 2019"
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Let's Connect",
+    "text": "I'm always open to new opportunities and collaborations. Feel free to reach out!",
+    "github": "https://github.com/saikumargurugu",
+    "linkedin": "https://www.linkedin.com/in/sai-kumar-gurugubelli/",
+    "contactButton": {
+      "label": "Contact Me",
+      "href": "/contact"
+    }
+  }
+}
