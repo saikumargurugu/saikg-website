@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { FaPaperPlane, FaLinkedin } from 'react-icons/fa';
+import { THEME } from '../theme';
 
 
 function useScrollFadeIn() {
@@ -70,12 +71,12 @@ const ContactPage = () => {
 
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-12 px-6 sm:px-10 transition-colors duration-300">
-      <section ref={fade} className="max-w-2xl mx-auto mt-24 py-16 bg-white dark:bg-gray-800 rounded-2xl shadow-md px-8 sm:px-12 opacity-0 translate-y-10 transition duration-1000 ease-out">
-        <h2 className="text-3xl font-bold text-center text-blue-700 dark:text-blue-200 mb-8">
+    <main className={`min-h-screen py-12 px-6 sm:px-10 ${THEME.mainBg} ${THEME.mainText} transition-colors duration-300`}>
+      <section ref={fade} className={`max-w-2xl mx-auto mt-24 py-16 ${THEME.cardBg} ${THEME.card} shadow-md px-8 sm:px-12 opacity-0 translate-y-10 transition duration-1000 ease-out`}>
+        <h2 className={`text-3xl font-bold text-center ${THEME.headingText} mb-8 drop-shadow-lg`}>
           Contact Me
         </h2>
-        <p className="text-gray-700 dark:text-gray-300 mb-6">
+        <p className={`text-lg text-green-100 mb-6`}>
           I am always open to discussing new projects, ideas, or opportunities. Feel free to reach out using the form below, or connect with me on LinkedIn.
         </p>
         <div className="mb-6 text-center">
@@ -83,19 +84,19 @@ const ContactPage = () => {
             href="https://www.linkedin.com/in/sai-kumar-gurugubelli/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-100"
+            className={THEME.link}
           >
             Connect on LinkedIn <FaLinkedin className="inline-block ml-1" />
           </a>
-          <p className="text-gray-700 dark:text-gray-300 mt-2">
+          <p className={`${THEME.bodyText} mt-2`}>
             Or you can directly email me at: saikumar.gurugu@gmail.com
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-6">
+  <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-base font-semibold text-green-200 mb-1"
             >
               Your Name
             </label>
@@ -104,14 +105,14 @@ const ContactPage = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
+              className="mt-1 block w-full py-2 px-3 border-2 border-green-700 bg-green-950 text-green-100 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 placeholder-green-300"
               required
             />
           </div>
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-base font-semibold text-green-200 mb-1"
             >
               Your Email
             </label>
@@ -120,14 +121,14 @@ const ContactPage = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
+              className="mt-1 block w-full py-2 px-3 border-2 border-green-700 bg-green-950 text-green-100 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 placeholder-green-300"
               required
             />
           </div>
           <div>
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-base font-semibold text-green-200 mb-1"
             >
               Your Message
             </label>
@@ -136,20 +137,19 @@ const ContactPage = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={4}
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
+              className="mt-1 block w-full py-2 px-3 border-2 border-green-700 bg-green-950 text-green-100 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 placeholder-green-300"
               required
             ></textarea>
           </div>
           <div className="text-center">
             <button
               type="submit"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 text-white rounded-full font-semibold shadow-md hover:scale-105 transition duration-300"
+              className="inline-flex items-center px-6 py-3 bg-green-700 hover:bg-green-600 text-green-100 rounded-full font-bold shadow-lg hover:scale-105 transition duration-300 border-2 border-green-900"
               disabled={isSubmitting}
             >
               Send Message
               {isSubmitting ? (
                 <span className="ml-2 animate-spin">
-                  {/* You can use a loading spinner component here */}
                   ...
                 </span>
               ) : (

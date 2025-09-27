@@ -1,36 +1,43 @@
-/* styles/globals.css */
-/* app/globals.css */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Quicksand:wght@400;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  --color-reddish-brown: #330000;
+  --color-taupe: #73605B;
+  --color-peachy-brown: #D09683;
+  --color-text-dark: #2d1b12;
+  --color-text-light: #fff8f2;
+}
 
-body {
-  font-family: Arial, sans-serif;
+
+
+body, .font-body {
+  font-family: 'Quicksand', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
-  color: #333;
+  color: #fff;
+  background: var(--color-reddish-brown);
 }
 
-.fade-in {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+/* Headings: Orbitron, bold, always white, no shadow */
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.03em;
 }
 
-.fade-in-visible {
-  opacity: 1;
-}
+/* Body: Quicksand, white for contrast */
+
+
 
 
 /* styles/globals.css */
-html {
-  transition: background-color 0.3s ease;
-}
-
-body {
-  transition: color 0.3s ease;
-}
 
 .dark {
   background-color: #2d2d2d;
   color: #f5f5f5;
 }
+
