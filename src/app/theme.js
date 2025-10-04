@@ -16,7 +16,7 @@ export const THEME = {
   badgeText: 'text-green-100',
   // Buttons
   // primaryBtn: 'bg-green-900 hover:bg-green-800 text-white',
-  primaryBtn: 'bg-black-900 hover:bg-black-800 text-white',
+  primaryBtn: 'bg-black-900 hover:bg-black-900 text-white',
   secondaryBtn: 'bg-white/10 hover:bg-white/20 text-green-200',
   ctaBtn: 'bg-black-700 hover:bg-black-600 text-white',
   // Layout 
