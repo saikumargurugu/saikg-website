@@ -95,7 +95,7 @@ export default function Home() {
               {item.icon === 'palette' && <FaPalette size={48} className="text-green-300 mb-4" />}
               {item.icon === 'rocket' && <FaRocket size={48} className="text-green-300 mb-4" />}
               {item.icon === 'database' && <FaDatabase size={48} className="text-green-300 mb-4" />}
-              <h3 className={`text-xl font-bold font-display ${THEME.subheadingText} mb-2`}>{item.title}</h3>
+              <h3 className={`text-xl font-bold font-display ${THEME.subheadingText} mb-2 text-center`}>{item.title}</h3>
               <p className={`${THEME.bodyText} text-center mb-2`}>{item.description}</p>
             </div>
           ))}
