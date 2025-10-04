@@ -15,9 +15,10 @@ export const THEME = {
   bodyText: 'text-gray-300',
   badgeText: 'text-green-100',
   // Buttons
-  primaryBtn: 'bg-green-900 hover:bg-green-800 text-white',
+  // primaryBtn: 'bg-green-900 hover:bg-green-800 text-white',
+  primaryBtn: 'bg-black-900 hover:bg-black-800 text-white',
   secondaryBtn: 'bg-white/10 hover:bg-white/20 text-green-200',
-  ctaBtn: 'bg-green-700 hover:bg-green-600 text-white',
+  ctaBtn: 'bg-black-700 hover:bg-black-600 text-white',
   // Layout 
   section: 'max-w-6xl mx-auto mb-16 px-4',
   sectionNarrow: 'max-w-3xl mx-auto mb-16 px-4 py-10 rounded-2xl shadow-2xl',

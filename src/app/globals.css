@@ -18,7 +18,7 @@ body, .font-body {
   margin: 0;
   padding: 0;
   color: #fff;
-  background: var(--color-reddish-brown);
+  /* background: var(--color-reddish-brown); */
 }
 
 /* Headings: Orbitron, bold, always white, no shadow */
