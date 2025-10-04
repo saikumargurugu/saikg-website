@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-transparent text-white transition-colors duration-300 flex flex-col min-h-screen items-center justify-center relative overflow-x-hidden">
         <VideoBackground />
         {loading && <Loader />}
-  <header className="sticky top-0 z-50 shadow-xl rounded-b-2xl transition-colors duration-300 bg-red-900 backdrop-blur-md border-b border-red-700 w-[90vw] max-w-6xl mx-auto">
+  <header className="sticky top-0 z-50 shadow-xl rounded-b-2xl transition-colors duration-300 bg-green-900 backdrop-blur-md border-b border-green-700 w-[90vw] max-w-6xl mx-auto">
           <nav className="flex justify-between items-center w-full py-3 px-2 sm:px-6 bg-transparent">
                         {/* Brand and theme switcher removed as requested */}
                         <div className="hidden md:flex space-x-4 md:space-x-6 text-lg font-medium items-center w-full justify-center !bg-transparent backdrop-blur-sm rounded-xl px-2 py-1" style={{background: 'transparent'}}>
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             <Link
                               key={link.href}
                               href={link.href}
-                              className={`py-2 px-3 rounded-lg transition-colors duration-200 font-bold ${pathname === link.href ? 'bg-red-900 text-red-300' : 'text-red-300 hover:bg-red-800 hover:text-white'}`}
+                              className={`py-2 px-3 rounded-lg transition-colors duration-200 font-bold ${pathname === link.href ? 'bg-green-900 text-green-300' : 'text-green-300 hover:bg-green-800 hover:text-white'}`}
                             >
                               {link.name}
                             </Link>
@@ -71,17 +71,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     {/* Mobile Menu */}
             <div
               ref={mobileMenuRef}
-              className={`md:hidden rounded-t-3xl border-4 border-red-800 animate-bounceIn 
+              className={`md:hidden rounded-t-3xl border-4 border-green-800 animate-bounceIn 
                 absolute left-0 right-0 top-full w-full z-50 overflow-hidden 
                 transition-[max-height,opacity] duration-500 
-                ${menuOpen ? 'max-h-96 opacity-100 animate-bounceIn bg-red-700/90' : 'max-h-0 opacity-0 bg-red-700/90'}`}
+                ${menuOpen ? 'max-h-96 opacity-100 animate-bounceIn bg-green-700/90' : 'max-h-0 opacity-0 bg-green-700/90'}`}
             >
               <div className="flex flex-col items-center space-y-4 text-lg font-medium rounded-b-2xl shadow-md py-4 w-full">
                               {navLinks.map((link) => (
                                 <Link
                                   key={link.href}
                                   href={link.href}
-                                  className={`py-2 px-3 rounded-lg transition-colors duration-200 font-bold w-full text-center ${pathname === link.href ? 'bg-red-800 text-red-300' : 'text-red-300 hover:bg-red-800 hover:text-white'}`}
+                                  className={`py-2 px-3 rounded-lg transition-colors duration-200 font-bold w-full text-center ${pathname === link.href ? 'bg-green-800 text-green-300' : 'text-green-300 hover:bg-green-800 hover:text-white'}`}
                                   onClick={() => setMenuOpen(false)}
                                 >
                                   {link.name}

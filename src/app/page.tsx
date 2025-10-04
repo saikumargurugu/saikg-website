@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <main className="min-h-screen px-2 sm:px-0 py-0 bg-transparent text-gray-900 dark:text-gray-100 font-body flex flex-col items-center justify-center">
       {/* HERO */}
-  <section ref={fade1} className="flex flex-col items-center justify-center min-h-[70vh] text-center gap-6 px-4 sm:px-0 mb-16 w-full flex-1">
+  <section ref={fade1} className="flex flex-col items-center justify-center min-h-[60vh] text-center gap-6 px-4 sm:px-0 w-full flex-1">
   <h1 className="text-5xl sm:text-7xl font-extrabold font-display mb-2" style={{letterSpacing: '0.04em'}}>
     {typedName}
     <span className="inline-block w-2 h-8 bg-green-200 align-middle animate-pulse ml-1" style={{verticalAlign: '0.1em'}}></span>
@@ -64,7 +64,7 @@ export default function Home() {
           {homeContent.hero.title}
         </p>
         <div className="flex flex-wrap justify-center gap-4 mt-2">
-          <Link href={homeContent.hero.cta.href} className={`inline-flex items-center px-8 py-3 rounded-full text-lg font-bold shadow-lg hover:scale-105 transition duration-300 ${THEME.primaryBtn}`}>
+          <Link href={homeContent.hero.cta.href} className={`inline-flex items-center px-8 py-3 rounded-full text-lg font-bold shadow-lg hover:scale-105 transition duration-300 ${THEME.secondaryBtn}`}>
             {greeting} <FaArrowRight className="ml-2" />
           </Link>
           <Link href={homeContent.hero.github.href} className={`inline-flex items-center px-6 py-3 rounded-full text-lg font-bold shadow-md hover:scale-105 transition duration-300 ${THEME.secondaryBtn}`}>
