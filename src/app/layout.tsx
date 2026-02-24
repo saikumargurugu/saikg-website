@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { navLinks } from './siteConfig';
+import { Analytics } from '@vercel/analytics/next';
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -182,6 +183,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="w-[90vw] max-w-4xl flex flex-col items-center justify-center px-4 py-8 font-body relative z-10 bg-transparent">
           {!loading && children}
         </main>
+        <Analytics />
             </body>
         </html>
     );
