@@ -1,9 +1,19 @@
 "use client";
 
 import React, { useState } from 'react';
-import { FaPaperPlane, FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaCheck } from 'react-icons/fa';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import Script from 'next/script';
+import { FaPaperPlane, FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaCheck, FaShieldAlt } from 'react-icons/fa';
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
 const contactMeta = [
   {
@@ -47,13 +57,28 @@ export default function ContactPage() {
     setError(null);
 
     try {
-      await addDoc(collection(db, 'messages'), {
-        name,
-        email,
-        subject,
-        message,
-        createdAt: serverTimestamp(),
+      // Get reCAPTCHA v3 token
+      const recaptchaToken = await new Promise<string>((resolve, reject) => {
+        window.grecaptcha.ready(async () => {
+          try {
+            const token = await window.grecaptcha.execute(SITE_KEY, { action: 'contact_submit' });
+            resolve(token);
+          } catch (err) {
+            reject(err);
+          }
+        });
       });
+
+      // Submit to API route (verifies token + writes to Firestore)
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message, recaptchaToken }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error ?? 'Failed to send message.');
 
       setSuccess(true);
       setName(''); setEmail(''); setSubject(''); setMessage('');
@@ -72,202 +97,219 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="font-body min-h-screen">
+    <>
+      {/* Load reCAPTCHA v3 */}
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
+        strategy="lazyOnload"
+      />
 
-      {/* Header */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 dot-grid">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4 block">
-            Let&apos;s Talk
-          </span>
-          <h1
-            className="text-4xl sm:text-5xl font-extrabold text-slate-100 font-display mb-4"
-            style={{ letterSpacing: '-0.02em' }}
-          >
-            Get In Touch
-          </h1>
-          <p className="text-slate-400 text-lg max-w-lg mx-auto leading-relaxed font-body">
-            Have a project in mind or want to discuss opportunities?
-            I&apos;d love to hear from you.
-          </p>
-        </div>
-      </section>
+      <div className="font-body min-h-screen">
 
-      {/* Content */}
-      <section
-        className="py-16 px-4 sm:px-6 lg:px-8 border-t"
-        style={{ borderColor: 'rgba(255,255,255,0.04)' }}
-      >
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10">
-
-          {/* Contact info */}
-          <div className="lg:col-span-2 flex flex-col gap-5">
-            <div>
-              <h2 className="text-xl font-bold text-slate-100 font-display mb-2">Contact Details</h2>
-              <p className="text-slate-400 text-sm leading-relaxed font-body">
-                I&apos;m currently open to full-time roles and freelance contracts.
-                Response time is typically within 24 hours.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3">
-              {contactMeta.map((item) => {
-                const Icon = item.icon;
-                const inner = (
-                  <div
-                    className="flex items-center gap-4 p-4 rounded-xl transition-all"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
-                  >
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ background: 'rgba(99,102,241,0.12)' }}
-                    >
-                      <Icon size={15} className="text-indigo-400" />
-                    </div>
-                    <div>
-                      <div className="text-slate-500 text-xs uppercase tracking-wider font-body">{item.label}</div>
-                      <div className="text-slate-200 text-sm font-medium font-body">{item.value}</div>
-                    </div>
-                  </div>
-                );
-                return item.href ? (
-                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                    {inner}
-                  </a>
-                ) : (
-                  <div key={item.label}>{inner}</div>
-                );
-              })}
-            </div>
-
-            <div
-              className="rounded-xl p-5 mt-2"
-              style={{ background: 'rgba(99,102,241,0.06)', border: '1px solid rgba(99,102,241,0.15)' }}
+        {/* Header */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 dot-grid">
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4 block">
+              Let&apos;s Talk
+            </span>
+            <h1
+              className="text-4xl sm:text-5xl font-extrabold text-slate-100 font-display mb-4"
+              style={{ letterSpacing: '-0.02em' }}
             >
-              <div className="status-badge mb-3 inline-flex">
-                <span className="status-dot" />
-                Available for opportunities
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed font-body">
-                Currently open to full-time positions in Brisbane or remote roles globally.
-              </p>
-            </div>
+              Get In Touch
+            </h1>
+            <p className="text-slate-400 text-lg max-w-lg mx-auto leading-relaxed font-body">
+              Have a project in mind or want to discuss opportunities?
+              I&apos;d love to hear from you.
+            </p>
           </div>
+        </section>
 
-          {/* Form */}
-          <div className="lg:col-span-3">
-            <div
-              className="rounded-2xl p-6 sm:p-8"
-              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
-            >
-              {success ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center"
-                    style={{ background: 'rgba(52,211,153,0.12)' }}
-                  >
-                    <FaCheck size={28} className="text-emerald-400" />
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-100 font-display">Message sent!</h3>
-                  <p className="text-slate-400 text-sm font-body max-w-xs">
-                    Thanks for reaching out. I&apos;ll get back to you within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => setSuccess(false)}
-                    className="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors font-body"
-                  >
-                    Send another message
-                  </button>
+        {/* Content */}
+        <section
+          className="py-16 px-4 sm:px-6 lg:px-8 border-t"
+          style={{ borderColor: 'rgba(255,255,255,0.04)' }}
+        >
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10">
+
+            {/* Contact info */}
+            <div className="lg:col-span-2 flex flex-col gap-5">
+              <div>
+                <h2 className="text-xl font-bold text-slate-100 font-display mb-2">Contact Details</h2>
+                <p className="text-slate-400 text-sm leading-relaxed font-body">
+                  I&apos;m currently open to full-time roles and freelance contracts.
+                  Response time is typically within 24 hours.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                {contactMeta.map((item) => {
+                  const Icon = item.icon;
+                  const inner = (
+                    <div
+                      className="flex items-center gap-4 p-4 rounded-xl transition-all"
+                      style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+                    >
+                      <div
+                        className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{ background: 'rgba(99,102,241,0.12)' }}
+                      >
+                        <Icon size={15} className="text-indigo-400" />
+                      </div>
+                      <div>
+                        <div className="text-slate-500 text-xs uppercase tracking-wider font-body">{item.label}</div>
+                        <div className="text-slate-200 text-sm font-medium font-body">{item.value}</div>
+                      </div>
+                    </div>
+                  );
+                  return item.href ? (
+                    <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                      {inner}
+                    </a>
+                  ) : (
+                    <div key={item.label}>{inner}</div>
+                  );
+                })}
+              </div>
+
+              <div
+                className="rounded-xl p-5 mt-2"
+                style={{ background: 'rgba(99,102,241,0.06)', border: '1px solid rgba(99,102,241,0.15)' }}
+              >
+                <div className="status-badge mb-3 inline-flex">
+                  <span className="status-dot" />
+                  Available for opportunities
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <p className="text-slate-400 text-sm leading-relaxed font-body">
+                  Currently open to full-time positions in Brisbane or remote roles globally.
+                </p>
+              </div>
+
+              {/* Security badge */}
+              <div className="flex items-center gap-2 text-slate-600 text-xs font-body">
+                <FaShieldAlt size={11} />
+                Protected by Google reCAPTCHA v3
+              </div>
+            </div>
+
+            {/* Form */}
+            <div className="lg:col-span-3">
+              <div
+                className="rounded-2xl p-6 sm:p-8"
+                style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                {success ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center"
+                      style={{ background: 'rgba(52,211,153,0.12)' }}
+                    >
+                      <FaCheck size={28} className="text-emerald-400" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-100 font-display">Message sent!</h3>
+                    <p className="text-slate-400 text-sm font-body max-w-xs">
+                      Thanks for reaching out. I&apos;ll get back to you within 24 hours.
+                    </p>
+                    <button
+                      onClick={() => setSuccess(false)}
+                      className="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors font-body"
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-slate-400 text-xs uppercase tracking-wider mb-2 font-body">
+                          Your Name *
+                        </label>
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          className={inputClass}
+                          style={inputStyle}
+                          placeholder="John Smith"
+                          maxLength={100}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-400 text-xs uppercase tracking-wider mb-2 font-body">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className={inputClass}
+                          style={inputStyle}
+                          placeholder="john@company.com"
+                          maxLength={200}
+                          required
+                        />
+                      </div>
+                    </div>
+
                     <div>
                       <label className="block text-slate-400 text-xs uppercase tracking-wider mb-2 font-body">
-                        Your Name *
+                        Subject
                       </label>
                       <input
                         type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
                         className={inputClass}
                         style={inputStyle}
-                        placeholder="John Smith"
-                        required
+                        placeholder="Project inquiry / Job opportunity / Collaboration"
+                        maxLength={200}
                       />
                     </div>
+
                     <div>
                       <label className="block text-slate-400 text-xs uppercase tracking-wider mb-2 font-body">
-                        Email Address *
+                        Message *
                       </label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                      <textarea
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        rows={5}
                         className={inputClass}
                         style={inputStyle}
-                        placeholder="john@company.com"
+                        placeholder="Tell me about your project, role, or what you'd like to discuss..."
+                        maxLength={2000}
                         required
                       />
+                      <div className="text-right text-slate-600 text-xs mt-1 font-body">
+                        {message.length}/2000
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-slate-400 text-xs uppercase tracking-wider mb-2 font-body">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      className={inputClass}
-                      style={inputStyle}
-                      placeholder="Project inquiry / Job opportunity / Collaboration"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-slate-400 text-xs uppercase tracking-wider mb-2 font-body">
-                      Message *
-                    </label>
-                    <textarea
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      rows={5}
-                      className={inputClass}
-                      style={inputStyle}
-                      placeholder="Tell me about your project, role, or what you'd like to discuss..."
-                      required
-                    />
-                  </div>
-
-                  {error && (
-                    <div
-                      className="px-4 py-3 rounded-xl text-sm text-red-400 font-body"
-                      style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)' }}
-                    >
-                      {error}
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="btn-gradient text-base w-full justify-center mt-1"
-                    style={submitting ? { opacity: 0.7, cursor: 'not-allowed' } : {}}
-                  >
-                    {submitting ? (
-                      <>Sending…</>
-                    ) : (
-                      <>Send Message <FaPaperPlane size={14} /></>
+                    {error && (
+                      <div
+                        className="px-4 py-3 rounded-xl text-sm text-red-400 font-body"
+                        style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)' }}
+                      >
+                        {error}
+                      </div>
                     )}
-                  </button>
-                </form>
-              )}
+
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="btn-gradient text-base w-full justify-center mt-1"
+                      style={submitting ? { opacity: 0.7, cursor: 'not-allowed' } : {}}
+                    >
+                      {submitting ? <>Sending…</> : <>Send Message <FaPaperPlane size={14} /></>}
+                    </button>
+                  </form>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
