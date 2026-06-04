@@ -7,26 +7,30 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Example: add a unique Google Font
-        display: ['"Orbitron"', 'Arial', 'sans-serif'],
-        body: ['"Quicksand"', 'Arial', 'sans-serif'],
+        display: ['"Sora"', 'sans-serif'],
+        body: ['"Inter"', 'Arial', 'sans-serif'],
       },
       colors: {
-        reddishBrown: '#330000',
-        taupe: '#73605B',
-        peachyBrown: '#D09683',
-        textDark: 'var(--color-text-dark)',
-        textLight: 'var(--color-text-light)',
-        black: '#000',
-        white: '#fff',
+        accent:   '#6366f1',
+        'accent-light': '#818cf8',
+        'accent-end': '#8b5cf6',
+        'bg-primary': '#050c18',
+        'bg-surface': '#0a1628',
       },
-  backgroundImage: {},
       animation: {
-        'bg-move': 'bgMove 10s ease-in-out infinite alternate',
-        'glow-brown': 'glowBrown 2s infinite alternate',
-        'border-glow-brown': 'borderGlowBrown 2s infinite alternate',
+        'float': 'floatY 4s ease-in-out infinite',
+        'shimmer': 'shimmer 3s linear infinite',
       },
-      keyframes: {},
+      keyframes: {
+        floatY: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%':       { transform: 'translateY(-8px)' },
+        },
+        shimmer: {
+          '0%':   { 'background-position': '-200% center' },
+          '100%': { 'background-position': '200% center' },
+        },
+      },
     },
   },
   darkMode: 'class',

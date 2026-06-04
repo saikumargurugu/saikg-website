@@ -1,106 +1,204 @@
+"use client";
 
-import React from "react";
-import { THEME } from '../theme';
+import React, { useEffect, useRef } from 'react';
+import { FaExternalLinkAlt, FaGithub, FaCode, FaServer, FaCloud } from 'react-icons/fa';
+
+function useFadeIn() {
+  const ref = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) el.classList.add('visible'); },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}
 
 const projects = [
   {
-    title: "Brisbane Badminton Center",
+    title: 'Brisbane Badminton Center',
+    subtitle: 'Full-Stack Web Application',
     description:
-      "A modern web app for booking and managing badminton courts in Brisbane. Built with Next.js, React, and cloud technologies for a seamless user experience.",
-    url: "https://brisbanebadmintoncenter.vercel.app/",
-    tags: ["Next.js", "React", "Cloud", "Booking", "TailwindCSS"],
-    image: "/globe.svg",
+      'A production-grade court booking platform built for a Brisbane sports facility. Users can view real-time court availability, book time slots, and manage their bookings — all through a clean, responsive interface. The system is backed by cloud storage and deployed on Vercel for global performance.',
+    url: 'https://www.badmintonbrisbane.com.au/',
+    github: null,
+    tags: ['Next.js', 'React', 'TailwindCSS', 'Cloud Storage', 'Vercel'],
+    highlights: [
+      'Real-time court availability & booking management',
+      'Mobile-responsive with optimised performance',
+      'Cloud-backed infrastructure, Vercel deployment',
+    ],
+    icon: 'code',
+    status: 'Live',
+    year: '2024',
   },
-  // Add more projects here as needed
 ];
 
+const IconMap: Record<string, React.ReactNode> = {
+  code:   <FaCode   size={22} className="text-white" />,
+  server: <FaServer size={22} className="text-white" />,
+  cloud:  <FaCloud  size={22} className="text-white" />,
+};
+
 export default function ProjectsPage() {
+  const s1 = useFadeIn();
+
   return (
-    <main className={`min-h-screen py-12 px-4 md:px-8 ${THEME.mainBg} ${THEME.mainText}`}>
-      <section className={`mb-12 text-center`}>
-        <h1 className={`text-4xl md:text-5xl font-display font-extrabold mb-2 ${THEME.headingText} drop-shadow-lg`}>
-          <span className="inline-block animate-pulse">Projects</span>
-        </h1>
-        <p className={`text-base md:text-lg ${THEME.bodyText} max-w-xl mx-auto mb-2`}>
-          A showcase of my best work, built with modern tech and a focus on user experience.
-        </p>
-        <span className={`inline-block text-xs uppercase tracking-widest ${THEME.badgeText} font-bold mb-4`}>Selected Work</span>
+    <div className="font-body min-h-screen">
+
+      {/* Header */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 dot-grid">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-4 block">
+            Portfolio
+          </span>
+          <h1
+            className="text-4xl sm:text-5xl font-extrabold text-slate-100 font-display mb-4"
+            style={{ letterSpacing: '-0.02em' }}
+          >
+            Projects & Work
+          </h1>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed font-body">
+            A curated selection of projects I&apos;ve built — from full-stack web applications
+            to cloud-deployed services.
+          </p>
+        </div>
       </section>
-      <section className="flex justify-center">
-        {projects.length === 1 ? (
-          <div className="flex justify-center w-full">
-            <div
-              key={projects[0].title}
-              className={`group flex flex-col items-center justify-between p-6 ${THEME.cardBg} ${THEME.card} hover:shadow-2xl border-2 border-green-900 transition-all duration-300 min-h-[320px] max-w-md w-full`}
+
+      {/* Projects Grid */}
+      <section
+        ref={s1 as React.RefObject<HTMLElement>}
+        className="fade-section py-16 px-4 sm:px-6 lg:px-8 border-t"
+        style={{ borderColor: 'rgba(255,255,255,0.04)' }}
+      >
+        <div className="max-w-5xl mx-auto flex flex-col gap-6">
+          {projects.map((project) => (
+            <article
+              key={project.title}
+              className="glass-hover rounded-2xl overflow-hidden"
             >
-              <img
-                src={projects[0].image}
-                alt={projects[0].title}
-                className="w-14 h-14 mb-3 rounded-full border-2 border-indigo-700 bg-white/10 shadow group-hover:scale-110 transition-transform duration-300"
-              />
-              <h3 className={`text-xl font-bold font-display ${THEME.headingText} mb-1 group-hover:text-green-100 transition-colors duration-300`}>
-                {projects[0].title}
-              </h3>
-              <p className={`${THEME.bodyText} text-center mb-3 text-sm min-h-[48px]`}>{projects[0].description}</p>
-              <div className="flex flex-wrap gap-1 mb-3 justify-center">
-                {projects[0].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className={`px-2 py-0.5 rounded ${THEME.badge} text-[11px] font-semibold tracking-wide group-hover:bg-green-900 group-hover:text-green-100 transition-colors duration-300`}
+              <div className="p-6 sm:p-8">
+                <div className="flex items-start gap-5 mb-5">
+                  {/* Icon */}
+                  <div
+                    className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center"
+                    style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <a
-                href={projects[0].url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center px-4 py-1.5 ${THEME.primaryBtn} rounded-full text-sm font-bold shadow-md hover:scale-105 transition-all duration-300 mt-auto`}
-              >
-                Visit Project
-              </a>
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-            {projects.map((project) => (
-              <div
-                key={project.title}
-                className={`group flex flex-col items-center justify-between p-6 ${THEME.cardBg} ${THEME.card} hover:shadow-2xl border-2 border-green-900 transition-all duration-300 min-h-[320px]`}
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-14 h-14 mb-3 rounded-full border-2 border-indigo-700 bg-white/10 shadow group-hover:scale-110 transition-transform duration-300"
-                />
-                <h3 className={`text-xl font-bold font-display ${THEME.headingText} mb-1 group-hover:text-green-100 transition-colors duration-300`}>
-                  {project.title}
-                </h3>
-                <p className={`${THEME.bodyText} text-center mb-3 text-sm min-h-[48px]`}>{project.description}</p>
-                <div className="flex flex-wrap gap-1 mb-3 justify-center">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className={`px-2 py-0.5 rounded ${THEME.badge} text-[11px] font-semibold tracking-wide group-hover:bg-green-900 group-hover:text-green-100 transition-colors duration-300`}
+                    {IconMap[project.icon]}
+                  </div>
+
+                  {/* Title block */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center flex-wrap gap-3 mb-1">
+                      <h2 className="text-xl font-bold text-slate-100 font-display">
+                        {project.title}
+                      </h2>
+                      <span
+                        className="text-xs font-semibold px-2.5 py-0.5 rounded-full font-body"
+                        style={{ background: 'rgba(52,211,153,0.12)', color: '#34d399' }}
+                      >
+                        {project.status}
+                      </span>
+                      <span
+                        className="text-xs font-medium px-2.5 py-0.5 rounded-full font-body"
+                        style={{ background: 'rgba(148,163,184,0.08)', color: '#94a3b8' }}
+                      >
+                        {project.year}
+                      </span>
+                    </div>
+                    <p className="text-indigo-400 text-sm font-medium font-body">{project.subtitle}</p>
+                  </div>
+
+                  {/* External links */}
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-500 hover:text-slate-200 transition-colors"
+                        aria-label="GitHub repository"
+                      >
+                        <FaGithub size={18} />
+                      </a>
+                    )}
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-400 hover:text-indigo-300 transition-colors"
+                      aria-label="View live project"
                     >
-                      {tag}
-                    </span>
+                      <FaExternalLinkAlt size={16} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-slate-400 leading-relaxed mb-5 font-body text-sm sm:text-base">
+                  {project.description}
+                </p>
+
+                {/* Highlights */}
+                <ul className="flex flex-col gap-1.5 mb-5">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2.5 text-sm text-slate-400 font-body">
+                      <span
+                        className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        style={{ background: '#6366f1' }}
+                      />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="skill-tag">{tag}</span>
                   ))}
                 </div>
+              </div>
+
+              {/* Footer action */}
+              <div
+                className="px-6 sm:px-8 py-4 border-t flex items-center justify-between"
+                style={{ borderColor: 'rgba(255,255,255,0.04)' }}
+              >
+                <span className="text-slate-500 text-xs font-body">Deployed & live</span>
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center px-4 py-1.5 ${THEME.primaryBtn} rounded-full text-sm font-bold shadow-md hover:scale-105 transition-all duration-300 mt-auto`}
+                  className="flex items-center gap-1.5 text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors font-body"
                 >
-                  Visit Project
+                  Visit Live Site <FaExternalLinkAlt size={11} />
                 </a>
               </div>
-            ))}
-          </div>
-        )}
+            </article>
+          ))}
+        </div>
+
+        {/* More projects note */}
+        <div className="max-w-5xl mx-auto mt-10 text-center">
+          <p className="text-slate-500 text-sm font-body">
+            More projects in progress · Visit{' '}
+            <a
+              href="https://github.com/saikumargurugu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-400 hover:text-indigo-300 transition-colors"
+            >
+              GitHub
+            </a>{' '}
+            to see all repositories
+          </p>
+        </div>
       </section>
-    </main>
+    </div>
   );
 }

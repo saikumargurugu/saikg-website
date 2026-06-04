@@ -1,70 +1,125 @@
 {
   "profile": {
     "name": "Sai Kumar Gurugubelli",
+    "title": "Full-Stack Engineer & Backend Specialist",
     "location": "Brisbane, Australia",
-    "availability": "Open to remote & onsite work",
-    "avatarInitials": "SG",
+    "availability": "Open to full-time & contract roles",
+    "avatarInitials": "SK",
     "github": "https://github.com/saikumargurugu",
     "linkedin": "https://www.linkedin.com/in/sai-kumar-gurugubelli/",
-    "introHeading": "About Me",
-    "introText": "A passionate and results-driven freelance web developer dedicated to building robust and scalable web applications."
+    "email": "saikumar.gurugu@gmail.com",
+    "bio": "I'm a full-stack engineer with a strong backend focus, building scalable web applications and APIs used in real-world production environments. With a Master's in Information Technology from Griffith University (2024) and hands-on experience across the full software lifecycle — from system design to cloud deployment — I bring both technical depth and delivery discipline to every project.",
+    "bio2": "I actively use AI tools — Claude and GitHub Copilot — as core parts of my development workflow. Whether it's reviewing architecture decisions, generating test coverage, or integrating LLM-powered features into products, I know how to work with AI to ship faster and smarter. I care deeply about code quality, performance, and building systems that are maintainable at scale."
   },
-  "story": {
-    "heading": "My Story",
-    "paragraphs": [
-      "Driven by a passion for crafting efficient and scalable web solutions, I've honed my skills in backend development and full-stack technologies.",
-      "I specialize in building robust APIs, designing efficient databases, and leveraging cloud services to deliver high-performing applications.",
-      "My goal is to help businesses establish a strong online presence and achieve their objectives through innovative web solutions."
-    ]
-  },
+
+  "highlights": [
+    { "label": "Specialisation",  "value": "Backend Systems & APIs" },
+    { "label": "Availability",    "value": "Immediate" },
+    { "label": "Location",        "value": "Brisbane, AU · Remote OK" },
+    { "label": "Education",       "value": "M.IT — Griffith University" }
+  ],
+
   "skills": {
     "heading": "Skills & Expertise",
     "categories": [
       {
         "title": "Backend",
+        "color": "indigo",
         "items": [
-          "JavaScript", "TypeScript", "Python", "C++",
-          "Django", "Django Rest Framework", "Node.js",
-          "Database Design (MSSQL, MongoDB)"
+          "Node.js & Express",
+          "Django & DRF",
+          "Python",
+          "TypeScript",
+          "RESTful APIs",
+          "Authentication & JWT",
+          "Database Design"
         ]
       },
       {
         "title": "Frontend",
+        "color": "sky",
         "items": [
-          "React JS", "React Native", "HTML", "CSS", "JavaScript"
+          "React.js",
+          "Next.js",
+          "React Native",
+          "TypeScript",
+          "HTML5 & CSS3",
+          "Tailwind CSS",
+          "Responsive Design"
         ]
       },
       {
-        "title": "Tools & Technologies",
+        "title": "Cloud & DevOps",
+        "color": "emerald",
         "items": [
-          "Git", "Docker", "Linux OS", "AWS (S3, EC2)", "CI/CD Pipelines"
+          "AWS (EC2, S3, Lambda)",
+          "Docker",
+          "CI/CD Pipelines",
+          "Git & GitHub",
+          "Linux / Bash",
+          "Nginx"
+        ]
+      },
+      {
+        "title": "Databases",
+        "color": "amber",
+        "items": [
+          "PostgreSQL",
+          "MongoDB",
+          "MSSQL",
+          "Database Indexing",
+          "Query Optimization"
+        ]
+      },
+      {
+        "title": "AI & Tooling",
+        "color": "pink",
+        "items": [
+          "Claude (Anthropic)",
+          "GitHub Copilot",
+          "LLM API Integration",
+          "Prompt Engineering",
+          "AI-Assisted Development"
         ]
       }
     ]
   },
+
   "education": {
     "heading": "Education",
     "degrees": [
       {
         "title": "Master of Information Technology",
-        "institution": "Griffith University, Australia",
-        "date": "Graduated in June 2024"
+        "institution": "Griffith University",
+        "location": "Brisbane, Australia",
+        "date": "Jun 2024",
+        "detail": "Specialised in software engineering, cloud computing, and advanced database systems."
       },
       {
-        "title": "Bachelor of Technology in Computer Science and Engineering",
-        "institution": "JNTU-K, India",
-        "date": "Graduated in July 2019"
+        "title": "Bachelor of Technology — Computer Science & Engineering",
+        "institution": "JNTU-K",
+        "location": "India",
+        "date": "Jul 2019",
+        "detail": "Core foundations in algorithms, data structures, operating systems, and software development."
       }
     ]
   },
-  "contact": {
-    "heading": "Let's Connect",
-    "text": "I'm always open to new opportunities and collaborations. Feel free to reach out!",
-    "github": "https://github.com/saikumargurugu",
-    "linkedin": "https://www.linkedin.com/in/sai-kumar-gurugubelli/",
-    "contactButton": {
-      "label": "Contact Me",
-      "href": "/contact"
+
+  "values": [
+    {
+      "icon": "shield",
+      "title": "Code Quality",
+      "description": "I write clean, readable code with clear separation of concerns. Every PR I raise is production-ready."
+    },
+    {
+      "icon": "zap",
+      "title": "Delivery Focus",
+      "description": "I balance speed and quality — shipping iteratively while keeping technical debt in check."
+    },
+    {
+      "icon": "users",
+      "title": "Collaboration",
+      "description": "I thrive in cross-functional teams, communicating clearly with engineers, designers, and stakeholders alike."
     }
-  }
+  ]
 }

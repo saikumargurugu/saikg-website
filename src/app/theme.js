@@ -1,34 +1,20 @@
-// theme.js
-// Centralized style constants for use across all pages
-
+// Centralized style constants
 export const THEME = {
-  // Backgrounds
-  mainBg: 'bg-transparent',
-  heroBg: '',
-  aboutBg: 'bg-black/70 border border-green-900',
-  cardBg: 'bg-green-950 border border-green-900',
-  ctaBg: 'bg-green-900',
-  // Text
-  mainText: 'text-gray-900 dark:text-gray-100',
-  headingText: 'text-green-200',
-  subheadingText: 'text-green-100',
-  bodyText: 'text-gray-300',
-  badgeText: 'text-green-100',
-  // Buttons
-  // primaryBtn: 'bg-green-900 hover:bg-green-800 text-white',
-  primaryBtn: 'bg-black-900 hover:bg-black-900 text-white',
-  secondaryBtn: 'bg-white/10 hover:bg-white/20 text-green-200',
-  ctaBtn: 'bg-black-700 hover:bg-black-600 text-white',
-  // Layout 
-  section: 'max-w-6xl mx-auto mb-16 px-4',
-  sectionNarrow: 'max-w-3xl mx-auto mb-16 px-4 py-10 rounded-2xl shadow-2xl',
-  card: 'rounded-2xl shadow-xl',
-  // Misc
-  badge: 'px-4 py-2 rounded-full bg-green-800 font-bold shadow',
-  link: 'text-green-400 hover:text-green-200 hover:underline transition-colors duration-300 font-bold',
-  reddishBrown: '#330000', // dark reddish brown
-  taupe: '#73605B',        // taupe
-  peachyBrown: '#D09683',  // light peachy brown
-  textDark: '#2d1b12',     // for dark text
-  textLight: '#fff8f2',    // for light text
+  headingText:    'text-slate-100',
+  subheadingText: 'text-slate-200',
+  bodyText:       'text-slate-400',
+  accentText:     'text-indigo-400',
+  mutedText:      'text-slate-500',
+
+  cardBg:  'glass rounded-2xl',
+  hoverCard: 'glass-hover rounded-2xl',
+
+  primaryBtn:   'btn-gradient',
+  secondaryBtn: 'btn-outline',
+  accentBg:     'bg-indigo-600',
+
+  badge: 'skill-tag',
+  link:  'text-indigo-400 hover:text-indigo-300 transition-colors duration-200',
+
+  section: 'max-w-6xl mx-auto px-4 sm:px-6 lg:px-8',
 };

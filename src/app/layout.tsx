@@ -1,79 +1,38 @@
-"use client"; // Ensure this is a client-side component FaMoon, FaSun,
+"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import caGif from './assets/ca.gif';
 import './globals.css';
 import Loader from './Loader';
 import VideoBackground from './VideoBackground';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { navLinks } from './siteConfig';
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showNav, setShowNav] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const lastScrollY = useRef(0);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const toggleMenu = () => {
-    setMenuOpen((open) => !open);
-  };
-
-  // Draggable GIF state and handlers
-  const [gifPos, setGifPos] = useState({ x: 16, y: 16 });
-  const [dragging, setDragging] = useState(false);
-  const dragOffset = useRef({ x: 0, y: 0 });
-
-  function handleGifMouseDown(e: React.MouseEvent<HTMLDivElement>) {
-    setDragging(true);
-    dragOffset.current = {
-      x: e.clientX - gifPos.x,
-      y: e.clientY - gifPos.y,
-    };
-    document.body.style.userSelect = 'none';
-  }
-  useEffect(() => {
-    function handleMouseMove(e: MouseEvent) {
-      if (!dragging) return;
-      setGifPos({
-        x: e.clientX - dragOffset.current.x,
-        y: e.clientY - dragOffset.current.y,
-      });
-    }
-    function handleMouseUp() {
-      setDragging(false);
-      document.body.style.userSelect = '';
-    }
-    if (dragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    }
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [dragging]);
-
-  // Hide nav on scroll down, show on scroll up
   useEffect(() => {
     function handleScroll() {
       const currentY = window.scrollY;
-      if (currentY > lastScrollY.current && currentY > 80) {
+      setScrolled(currentY > 20);
+      if (currentY > lastScrollY.current && currentY > 100) {
         setShowNav(false);
       } else {
         setShowNav(true);
       }
       lastScrollY.current = currentY;
     }
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on click outside
   useEffect(() => {
     if (!menuOpen) return;
     function handleClick(e: MouseEvent) {
@@ -86,8 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }, [menuOpen]);
 
   useEffect(() => {
-    // Simulate loading for 1.2s or until video is ready
-    const timer = setTimeout(() => setLoading(false), 1200);
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -96,94 +54,174 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Sai Kumar Gurugubelli - Freelance Web Developer</title>
+        <title>Sai Kumar Gurugubelli — Full-Stack Engineer</title>
+        <meta name="description" content="Full-Stack Engineer specializing in Node.js, Django, React, and AWS. Building scalable backend systems and modern web applications. Based in Brisbane, Australia." />
+        <meta property="og:title" content="Sai Kumar Gurugubelli — Full-Stack Engineer" />
+        <meta property="og:description" content="Building production-grade web applications and scalable backend systems." />
       </head>
-      <body className="bg-transparent text-white transition-colors duration-300 flex flex-col min-h-screen items-center justify-center relative overflow-x-hidden">
+      <body className="font-body text-slate-100 min-h-screen overflow-x-hidden" style={{ background: '#050c18' }}>
         <VideoBackground />
+        {/* Strong overlay so content is always readable */}
+        <div className="fixed inset-0 z-0" style={{ background: 'rgba(5,12,24,0.82)' }} />
+
         {loading && <Loader />}
-        {/* Galaxy Starfield Background */}
-        <div className="absolute top-0 left-0 w-full h-64 z-40 pointer-events-none">
-          <div className="galaxy-starfield" />
-        </div>
-        {/* Brand GIF always visible in top left, draggable and grows on hover */}
-        <div
-          className={`fixed z-[100] cursor-move transition-transform duration-200 ${dragging ? 'pointer-events-none' : ''}`}
-          style={{
-            left: gifPos.x,
-            top: gifPos.y,
-            width: '10vw',
-            height: '10vw',
-            minWidth: 68,
-            minHeight: 68,
-            maxWidth: 226,
-            maxHeight: 226,
-            transform: dragging ? 'scale(1.15)' : undefined,
-          }}
-          onMouseDown={handleGifMouseDown}
+
+        {/* ===== Navigation ===== */}
+        <header
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            showNav ? 'translate-y-0' : '-translate-y-full'
+          } ${
+            scrolled
+              ? 'border-b border-white/[0.06] shadow-2xl shadow-black/60'
+              : ''
+          }`}
+          style={scrolled ? { background: 'rgba(5,12,24,0.92)', backdropFilter: 'blur(20px)' } : {}}
         >
-          <img
-            src={caGif.src ?? caGif}
-            alt="Brand"
-            style={{ width: '100%', height: '100%' }}
-            className="object-contain rounded-full shadow-md transition-transform duration-200 hover:scale-125"
-            draggable={false}
-          />
-        </div>
-  <header className={`sticky top-0 z-50 shadow-xl rounded-b-2xl transition-transform duration-300 bg-gradient-to-br from-[#0a0a23] via-[#1a1a40] to-[#2d0036] backdrop-blur-md border-b border-purple-900/60 w-[90vw] max-w-6xl mx-auto ${showNav ? 'translate-y-0' : '-translate-y-full'}`}>
-          <nav className="h-auto flex justify-between items-center w-full py-3 px-2 sm:px-6 bg-transparent galaxy-stars-move">
-            <div className="hidden md:flex space-x-4 md:space-x-6 text-lg font-medium items-center w-full justify-center backdrop-blur-sm rounded-xl px-2 py-1 bg-transparent relative">
+          <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm font-display"
+                style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
+              >
+                SK
+              </div>
+              <div className="hidden sm:block">
+                <span className="font-display font-semibold text-slate-100 text-sm group-hover:text-indigo-400 transition-colors leading-none block">
+                  Sai Kumar
+                </span>
+                <span className="text-slate-500 text-xs leading-none block">Full-Stack Engineer</span>
+              </div>
+            </Link>
+
+            {/* Desktop Links */}
+            <div className="hidden md:flex items-center gap-0.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`py-2 px-4 rounded-lg transition-all duration-300 font-bold relative overflow-hidden
-                    ${pathname === link.href
-                      ? 'text-pink-300 border-b-4 border-pink-400'
-                      : 'text-pink-200 hover:text-pink-300 hover:border-b-4 hover:border-pink-400'}
-                  `}
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    pathname === link.href
+                      ? 'text-indigo-400'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                  style={pathname === link.href ? { background: 'rgba(99,102,241,0.08)' } : {}}
                 >
-                  <span className="relative z-10">{link.name}</span>
+                  {link.name}
+                  {pathname === link.href && (
+                    <span className="nav-active-dot" />
+                  )}
                 </Link>
               ))}
+              <Link
+                href="/contact"
+                className="ml-3 px-5 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 hover:shadow-lg hover:-translate-y-0.5"
+                style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', boxShadow: '0 0 20px rgba(99,102,241,0.2)' }}
+              >
+                Hire Me
+              </Link>
             </div>
-                        {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center justify-end w-full">
-              <button onClick={toggleMenu} className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none transition-colors duration-300">
-                {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-              </button>
-            </div>
-                    </nav>
-                    {/* Mobile Menu Items */}
-            <div
-              ref={mobileMenuRef}
-              className={`md:hidden rounded-t-3xl  border-purple-900 animate-bounceIn 
-                absolute left-0 right-0 top-full w-full z-50 overflow-hidden 
-                transition-[max-height,opacity] duration-500 
-                ${menuOpen ? 'max-h-96 opacity-100 animate-bounceIn bg-gradient-to-br from-[#0a0a23] via-[#1a1a40] to-[#2d0036]' : 'max-h-0 opacity-0 bg-[#3b0764]'}`}
+
+            {/* Mobile Button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden text-slate-400 hover:text-slate-200 transition-colors p-2 rounded-lg hover:bg-white/5"
+              aria-label="Toggle navigation"
             >
-              <div className="flex flex-col items-center space-y-5 text-xl font-bold rounded-b-2xl shadow-2xl py-6 w-full bg-gradient-to-br from-[#0a0a23] via-[#1a1a40] to-[#2d0036]">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`py-3 px-6 rounded-2xl transition-all duration-300 font-bold w-full text-center relative overflow-hidden tracking-widest
-                      ${pathname === link.href
-                        ? 'text-pink-300 border-b-4 border-pink-400'
-                        : 'text-pink-200 hover:text-pink-300 hover:border-b-4 hover:border-pink-400'}
-                    `}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <span className="relative z-10 ">{link.name}</span>
-                  </Link>
-                ))}
-              </div>
+              {menuOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
+            </button>
+          </nav>
+
+          {/* Mobile Menu */}
+          <div
+            ref={mobileMenuRef}
+            className={`md:hidden absolute top-full left-0 right-0 border-b border-white/[0.06] transition-all duration-300 overflow-hidden ${
+              menuOpen ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0'
+            }`}
+            style={{ background: 'rgba(5,12,24,0.97)', backdropFilter: 'blur(20px)' }}
+          >
+            <div className="px-4 py-4 flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    pathname === link.href
+                      ? 'text-indigo-400 bg-indigo-500/10'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="mt-2 px-4 py-3 rounded-xl text-sm font-semibold text-white text-center"
+                style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
+              >
+                Hire Me
+              </Link>
             </div>
-                </header>
-          <main className="w-[90vw] max-w-4xl flex flex-col items-center justify-center px-4 py-8 font-body relative z-10 bg-transparent">
+          </div>
+        </header>
+
+        {/* ===== Main Content ===== */}
+        <main className="relative z-10 pt-16">
           {!loading && children}
         </main>
-            </body>
-        </html>
-    );
 
-  }
+        {/* ===== Footer ===== */}
+        <footer className="relative z-10 border-t mt-24" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-2.5">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs font-display"
+                  style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
+                >
+                  SK
+                </div>
+                <span className="text-slate-400 text-sm">
+                  Sai Kumar Gurugubelli
+                </span>
+              </div>
+              <div className="flex items-center gap-5">
+                <a
+                  href="https://github.com/saikumargurugu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-slate-200 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <FaGithub size={18} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/sai-kumar-gurugubelli/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-slate-200 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin size={18} />
+                </a>
+                <a
+                  href="mailto:saikumar.gurugu@gmail.com"
+                  className="text-slate-500 hover:text-slate-200 transition-colors"
+                  aria-label="Email"
+                >
+                  <FaEnvelope size={18} />
+                </a>
+              </div>
+            </div>
+            <p className="text-center text-slate-600 text-xs mt-6">
+              © {new Date().getFullYear()} Sai Kumar Gurugubelli · All rights reserved
+            </p>
+          </div>
+        </footer>
+      </body>
+    </html>
+  );
+}
