@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { FaPaperPlane, FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaCheck } from 'react-icons/fa';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 const contactMeta = [
   {
@@ -45,16 +47,13 @@ export default function ContactPage() {
     setError(null);
 
     try {
-      const res = await fetch('http://localhost:5001/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject, message }),
+      await addDoc(collection(db, 'messages'), {
+        name,
+        email,
+        subject,
+        message,
+        createdAt: serverTimestamp(),
       });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.errors?.[0]?.msg ?? 'Failed to send message.');
-      }
 
       setSuccess(true);
       setName(''); setEmail(''); setSubject(''); setMessage('');
